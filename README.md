@@ -1,5 +1,21 @@
 # vue-scaffold
 
-#vue脚手架 
+## Project setup
+```
+yarn install
+```
 
-## vue2 + vuex + vue-router + axios
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```

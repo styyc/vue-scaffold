@@ -1,0 +1,7 @@
+yarn-error.log
+yarn.lock
+node_modules
+npm-error.log
+.DS_Store
+.vscode
+.history
