@@ -5,3 +5,13 @@ npm-error.log
 .DS_Store
 .vscode
 .history
+/dist
+
+
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
