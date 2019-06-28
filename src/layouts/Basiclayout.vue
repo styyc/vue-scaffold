@@ -3,8 +3,9 @@
     <el-header class="header">Header</el-header>
     <el-container>
       <el-aside width="180px" class="aside">
-        <router-link to="/home">Home</router-link> |
-         <router-link to="/about">About</router-link>
+        <div v-for="item in Routes" :key="item.path">
+          <router-link :to="item.path">{{ item.name }}</router-link>
+        </div>
       </el-aside>
       <el-container>
         <el-main>
@@ -18,20 +19,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-export default {
-  name: 'basiclayout',
-  data () {
-    return {}
-  },
-  computed: {
-    ...mapState({
-      msg: (state) => state.app.msg
-    })
-  },
-  methods: {},
-  created () {}
-}
+  import { mapState } from 'vuex'
+  import Routes from '@/routes'
+
+  export default {
+    name: 'basiclayout',
+    data () {
+      return {}
+    },
+    computed: {
+      ...mapState({
+        msg: (state) => state.app.msg
+      }),
+      Routes() {
+        return Routes.filter(item => !item.hideInmenu)
+      }
+    },
+    methods: {}
+  }
 </script>
 
 <style lang="scss" scoped>
