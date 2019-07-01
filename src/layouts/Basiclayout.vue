@@ -10,6 +10,10 @@
       <el-container>
         <el-main>
           <div>{{ msg }}</div>
+          <div>{{ computedMsg }}</div>
+          <div style="word-wrap:break-word">{{ stateinfos }}</div>
+          <el-button @click="asyncchangeMsg(`click${Math.random()}`)">click</el-button>
+          <el-button @click="asynccommitPromise(`click${Math.random()}`)">asynccommitPromise</el-button>
           <router-view/>
         </el-main>
         <el-footer class="footer">Footer</el-footer>
@@ -19,24 +23,39 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import Routes from '@/routes'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import Routes from '@/routes'
 
-  export default {
-    name: 'basiclayout',
-    data () {
-      return {}
-    },
-    computed: {
-      ...mapState({
-        msg: (state) => state.app.msg
-      }),
-      Routes() {
-        return Routes.filter(item => !item.hideInmenu)
-      }
-    },
-    methods: {}
+export default {
+  name: 'basiclayout',
+  data () {
+    return {
+      stateinfos: ''
+    }
+  },
+  computed: {
+    ...mapState({
+      msg: state => state.app.msg
+    }),
+    ...mapGetters({
+      computedMsg: 'app/computedMsg'
+    }),
+    Routes () {
+      return Routes.filter(item => !item.hideInmenu)
+    }
+  },
+  methods: {
+    ...mapActions({
+      asyncchangeMsg: 'app/asyncchangeMsg'
+    }),
+    asynccommitPromise (params) {
+      // dispatch return promise
+      this.$store.dispatch('app/asyncchangeMsg', params).then(res => {
+        this.stateinfos = `${this.stateinfos}${res}`
+      })
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>
