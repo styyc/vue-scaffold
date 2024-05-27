@@ -1,3 +1,7 @@
 if (typeof SharedWorker !== 'undefined') {
-  const worker = new SharedWorker(url, 'hao360')
+  try {
+    const worker = new SharedWorker(url, 'hao360')
+  } catch (error) {
+    console.log(error)
+  }
 }
